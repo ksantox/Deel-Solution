@@ -1,4 +1,4 @@
-import { Sequelize, Model, DataTypes } from "sequelize";
+import { Sequelize, Model, DataTypes, Association } from "sequelize";
 
 // const sequelize = new Sequelize({
 //   dialect: 'sqlite',
@@ -7,7 +7,10 @@ import { Sequelize, Model, DataTypes } from "sequelize";
 
 const sequelize = new Sequelize({ dialect: "sqlite", storage: "database.sqlite3" });
 
-class Profile extends Model {}
+class Profile extends Model {
+  declare id: number;
+  declare type: string;
+}
 Profile.init(
   {
     firstName: {
@@ -35,7 +38,10 @@ Profile.init(
   }
 );
 
-class Contract extends Model {}
+class Contract extends Model {
+  declare ClientId?: number;
+  declare ContractorId?: number;
+}
 Contract.init(
   {
     terms: {
