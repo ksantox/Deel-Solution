@@ -18,7 +18,7 @@ JobRouter.get("/jobs/unpaid", getProfile, async (req: Request, res: Response): P
     res.json(unpaidJobs);
 });
 
-JobRouter.get("/jobs/:job_id/pay", getProfile, async (req: Request, res: Response): Promise<void> => {
+JobRouter.post("/jobs/:job_id/pay", getProfile, async (req: Request, res: Response): Promise<void> => {
     try {
         const profile: Profile = req.profile;
         const id: number = parseInt(req.params.job_id);

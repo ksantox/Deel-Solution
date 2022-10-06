@@ -8,7 +8,7 @@ const TransactionRouter: Router = Router();
 TransactionRouter.post("/balances/deposit/:userId", getProfile, async (req: Request, res: Response): Promise<void> => {
     try {
         const id: number = parseInt(req.params.userId);
-        const depositAmount: number = req.body.amount || 100;
+        const depositAmount: number = req.body.amount;
 
         if(depositAmount <= 0) {
             res.status(400).end();
