@@ -10,6 +10,10 @@ const sequelize = new Sequelize({ dialect: "sqlite", storage: "database.sqlite3"
 class Profile extends Model {
   declare id: number;
   declare type: string;
+  declare balance: number;
+  declare lastName: string;
+  declare firstName: string;
+  declare profession: string;
 }
 Profile.init(
   {
@@ -39,6 +43,8 @@ Profile.init(
 );
 
 class Contract extends Model {
+  declare terms: string;
+  declare status: Enumerator;
   declare ClientId?: number;
   declare ContractorId?: number;
 }
@@ -58,7 +64,12 @@ Contract.init(
   }
 );
 
-class Job extends Model {}
+class Job extends Model {
+  declare paid: boolean;
+  declare price: number;
+  declare paymentDate: Date;
+  declare description: string;
+}
 Job.init(
   {
     description: {
