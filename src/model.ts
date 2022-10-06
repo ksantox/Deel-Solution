@@ -1,9 +1,4 @@
-import { Sequelize, Model, DataTypes, Association } from "sequelize";
-
-// const sequelize = new Sequelize({
-//   dialect: 'sqlite',
-//   storage: './database.sqlite3'
-// });
+import { Sequelize, Model, DataTypes } from "sequelize";
 
 const sequelize = new Sequelize({ dialect: "sqlite", storage: "database.sqlite3" });
 
@@ -43,10 +38,11 @@ Profile.init(
 );
 
 class Contract extends Model {
+  declare id: number;
   declare terms: string;
-  declare status: Enumerator;
-  declare ClientId?: number;
-  declare ContractorId?: number;
+  declare status: string;
+  declare ClientId: number;
+  declare ContractorId: number;
 }
 Contract.init(
   {
@@ -69,6 +65,8 @@ class Job extends Model {
   declare price: number;
   declare paymentDate: Date;
   declare description: string;
+  
+  declare Contract: Contract;
 }
 Job.init(
   {
@@ -94,12 +92,12 @@ Job.init(
   }
 );
 
-Profile.hasMany(Contract, {as :'Contractor',foreignKey:'ContractorId'})
-Contract.belongsTo(Profile, {as: 'Contractor'})
-Profile.hasMany(Contract, {as : 'Client', foreignKey:'ClientId'})
-Contract.belongsTo(Profile, {as: 'Client'})
-Contract.hasMany(Job)
-Job.belongsTo(Contract)
+Profile.hasMany(Contract, {as :'Contractor',foreignKey:'ContractorId'});
+Contract.belongsTo(Profile, {as: 'Contractor'});
+Profile.hasMany(Contract, {as : 'Client', foreignKey:'ClientId'});
+Contract.belongsTo(Profile, {as: 'Client'});
+Contract.hasMany(Job);
+Job.belongsTo(Contract);
 
 export {
   sequelize,

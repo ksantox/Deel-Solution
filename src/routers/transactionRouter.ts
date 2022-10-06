@@ -5,7 +5,7 @@ import { TransactionController } from "../controllers";
 
 const TransactionRouter: Router = Router();
 
-TransactionRouter.get("/balances/deposit/:userId", getProfile, async (req: Request, res: Response): Promise<void> => {
+TransactionRouter.post("/balances/deposit/:userId", getProfile, async (req: Request, res: Response): Promise<void> => {
     try {
         const id: number = parseInt(req.params.userId);
         const depositAmount: number = req.body.amount || 100;
